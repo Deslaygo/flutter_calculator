@@ -1,16 +1,17 @@
-# flutter_calculator
+# Calculator app created with flutter
 
-A new Flutter project.
+This flutter app is running with the version `2.8.0` of flutter
 
-## Getting Started
+## Description
 
-This project is a starting point for a Flutter application.
+The app is a simple version of a calculator but implementing dynamic change theme between dark and light mode.
 
-A few resources to get you started if this is your first Flutter project:
+<figure>
+    <img src="./screenshots/dark_mode.png" alt="Dark mode" height="400" />
+    <figcaption>Dark mode</figcaption>
+</figure>
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<figure>
+    <img src="./screenshots/light_mode.png" alt="Light mode" height="400" />
+    <figcaption>Light mode</figcaption>
+</figure>
