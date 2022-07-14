@@ -1,4 +1,4 @@
-package com.deslaygo.corp.calculator.flutter_calculator
+package com.deslaygo.corp.calculator
 
 import io.flutter.embedding.android.FlutterActivity
 

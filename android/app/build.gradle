@@ -43,8 +43,8 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.deslaygo.corp.calculator.flutter_calculator"
-        minSdkVersion flutter.minSdkVersion
+        applicationId "com.deslaygo.corp.calculator"
+        minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
