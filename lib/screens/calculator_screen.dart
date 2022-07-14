@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_calculator/services/theme_service.dart';
 import 'package:flutter_calculator/widgets/operator_item.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:function_tree/function_tree.dart';
 
 class CalculatorScreen extends StatefulWidget {
   const CalculatorScreen({Key? key}) : super(key: key);
@@ -13,6 +15,7 @@ class CalculatorScreen extends StatefulWidget {
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
   double? resultado;
+  final formatter = NumberFormat.decimalPattern();
 
   String operacion = '';
 
@@ -25,7 +28,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
     if (operadores.contains(ultimoCaracter)) return;
 
-    operacion += operador;
+    operacion += operador == '÷' ? '/' : operador;
     setState(() {});
   }
 
@@ -33,7 +36,17 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         operacion += digito;
       });
 
-  void obtenerResultado() {}
+  void obtenerResultado() {
+    if (operacion.isEmpty) return;
+    resultado = operacion.interpret().toDouble();
+    setState(() {});
+  }
+
+  elimarCaracter() {
+    if (operacion.isEmpty) return;
+    operacion = operacion.substring(0, operacion.length - 1);
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +114,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                   Visibility(
                     visible: resultado != null,
                     child: Text(
-                      resultado.toString(),
+                      formatter.format(resultado ?? 0),
                       textAlign: TextAlign.left,
                       style: TextStyle(
                           fontSize: 40,
@@ -141,7 +154,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                           }),
                         ),
                         OperatorItem(
-                          label: 'C',
+                          label: 'D',
+                          onTap: elimarCaracter,
                           color: Theme.of(context).colorScheme.secondaryVariant,
                         ),
                         OperatorItem(
@@ -278,6 +292,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                         ),
                         OperatorItem(
                           label: '=',
+                          onTap: obtenerResultado,
                           color: Theme.of(context).colorScheme.error,
                         ),
                       ],
