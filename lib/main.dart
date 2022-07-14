@@ -37,12 +37,12 @@ class _CalculatorAppState extends State<CalculatorApp> {
       child: Consumer<ThemeService>(
           builder: (BuildContext context, value, Widget? child) {
         return MaterialApp(
-          title: 'Calculator',
+          title: 'Calculadora',
           debugShowCheckedModeBanner: false,
           theme: AppTheme.themeData(),
           darkTheme: AppTheme.darkThemeData(),
           themeMode: themeService.darkTheme ? ThemeMode.dark : ThemeMode.light,
-          home: CalculatorScreen(),
+          home: const CalculatorScreen(),
         );
       }),
     );
