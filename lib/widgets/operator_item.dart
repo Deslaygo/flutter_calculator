@@ -6,11 +6,15 @@ class OperatorItem extends StatelessWidget {
   final String? label;
   final Color? color;
   final VoidCallback? onTap;
+  final bool isIcon;
+  final Icon? icon;
   const OperatorItem({
     Key? key,
     this.label,
     this.onTap,
     this.color,
+    this.isIcon = false,
+    this.icon,
   }) : super(key: key);
 
   @override
@@ -26,11 +30,13 @@ class OperatorItem extends StatelessWidget {
         decoration: BoxDecoration(
             color: themeService.darkTheme ? const Color(0XFF272B33) : null,
             borderRadius: BorderRadius.circular(10)),
-        child: Text(
-          label!,
-          style: TextStyle(
-              color: color, fontSize: 18, fontWeight: FontWeight.bold),
-        ),
+        child: isIcon
+            ? icon
+            : Text(
+                label!,
+                style: TextStyle(
+                    color: color, fontSize: 18, fontWeight: FontWeight.bold),
+              ),
       ),
     );
   }

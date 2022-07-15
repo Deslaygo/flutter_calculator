@@ -20,7 +20,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   String operacion = '';
 
   void agregarOperador(String operador) {
-    final operadores = ['%', 'x', '+', '-', '÷', '.'];
+    final operadores = ['%', '*', '+', '-', '/', '.'];
 
     if (operacion.isEmpty) return;
 
@@ -28,7 +28,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
     if (operadores.contains(ultimoCaracter)) return;
 
-    operacion += operador == '÷' ? '/' : operador;
+    operacion += operador;
     setState(() {});
   }
 
@@ -43,7 +43,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   }
 
   elimarCaracter() {
-    if (operacion.isEmpty) return;
+    if (operacion.isEmpty || resultado != null) return;
+
     operacion = operacion.substring(0, operacion.length - 1);
     setState(() {});
   }
@@ -146,7 +147,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         OperatorItem(
-                          label: 'AC',
+                          label: 'C',
                           color: Theme.of(context).colorScheme.secondaryVariant,
                           onTap: () => setState(() {
                             operacion = '';
@@ -154,8 +155,13 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                           }),
                         ),
                         OperatorItem(
-                          label: 'D',
                           onTap: elimarCaracter,
+                          isIcon: true,
+                          icon: Icon(
+                            FontAwesomeIcons.deleteLeft,
+                            color:
+                                Theme.of(context).colorScheme.secondaryVariant,
+                          ),
                           color: Theme.of(context).colorScheme.secondaryVariant,
                         ),
                         OperatorItem(
@@ -166,7 +172,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                         OperatorItem(
                           label: '÷',
                           color: Theme.of(context).colorScheme.error,
-                          onTap: () => agregarOperador('÷'),
+                          onTap: () => agregarOperador('/'),
                         ),
                       ],
                     ),
@@ -198,7 +204,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                         OperatorItem(
                           label: 'x',
                           color: Theme.of(context).colorScheme.error,
-                          onTap: () => agregarOperador('x'),
+                          onTap: () => agregarOperador('*'),
                         ),
                       ],
                     ),
@@ -271,10 +277,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         OperatorItem(
-                          label: 'R',
+                          label: '00',
                           color: themeService.darkTheme
                               ? Colors.white
                               : Colors.black,
+                          onTap: () => agregarDigito('00'),
                         ),
                         OperatorItem(
                           label: '0',
